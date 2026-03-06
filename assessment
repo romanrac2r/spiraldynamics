@@ -1,0 +1,82 @@
+// Tento kód si ulož ako 'page.tsx' v Next.js projekte
+import React, { useState } from 'react';
+
+// Farby podľa Logomanuálu Forbes Growclub [cite: 65, 66]
+const BRAND = {
+  dark: '#1e1a34',
+  accent: '#c7a1f7',
+  white: '#ffffff'
+};
+
+// Mapovanie hodnôt z tvojho Excelu na Spiral Dynamics 
+const VALUES_MAP = [
+  { name: "PORIADOK", level: "Blue" }, { name: "HARMÓNIA", level: "Green" },
+  { name: "STABILITA", level: "Blue" }, { name: "SÚDRŽNOSŤ", level: "Green" },
+  { name: "MORÁLKA", level: "Blue" }, { name: "SPRAVODLIVOSŤ", level: "Green" },
+  { name: "DISCIPLÍNA", level: "Blue" }, { name: "ROVNOSŤ", level: "Green" },
+  { name: "PRESNOSŤ", level: "Blue" }, { name: "KONSENZUS", level: "Green" },
+  { name: "ŠTRUKTÚRA", level: "Blue" }, { name: "SPOLUPATRIČNOSŤ", level: "Green" },
+  { name: "LOGIKA", level: "Orange" }, { name: "EMPATIA", level: "Green" },
+  { name: "ÚSPECH", level: "Orange" }, { name: "SPOLUPRÁCA", level: "Green" },
+  { name: "AMBICIÓZNOSŤ", level: "Orange" }, { name: "TOLERANCIA", level: "Green" }
+];
+
+export default function Assessment() {
+  const [selected, setSelected] = useState([]);
+  const [name, setName] = useState("");
+
+  const handleSelect = (val) => {
+    if (selected.includes(val)) {
+      setSelected(selected.filter(i => i !== val));
+    } else if (selected.length < 7) {
+      setSelected([...selected, val]);
+    }
+  };
+
+  return (
+    <div style={{ backgroundColor: BRAND.dark, minHeight: '100vh', color: 'white', padding: '40px' }}>
+      {/* Header s logikou manuálu - Forbes biely, Growclub fialový [cite: 14, 20] */}
+      <header style={{ marginBottom: '50px', borderBottom: `1px solid ${BRAND.accent}44`, paddingBottom: '20px' }}>
+        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', letterSpacing: '-1px' }}>
+          FORBES <span style={{ color: BRAND.accent }}>GROWCLUB</span>
+        </h1>
+        <p style={{ opacity: 0.8 }}>Assessment hodnotových rámcov (Spiral Dynamics)</p>
+      </header>
+
+      <section style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <input 
+          placeholder="Tvoje meno / Tím" 
+          onChange={(e) => setName(e.target.value)}
+          style={{ width: '100%', padding: '15px', background: 'transparent', border: `1px solid ${BRAND.accent}`, color: 'white', marginBottom: '30px' }}
+        />
+
+        <h3 className="mb-4">Vyberte presne 7 kľúčových hodnôt: ({selected.length}/7)</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+          {VALUES_MAP.map(v => (
+            <button 
+              key={v.name}
+              onClick={() => handleSelect(v.name)}
+              style={{
+                padding: '12px',
+                textAlign: 'left',
+                border: `1px solid ${selected.includes(v.name) ? BRAND.accent : '#333'}`,
+                background: selected.includes(v.name) ? BRAND.accent : 'transparent',
+                color: selected.includes(v.name) ? BRAND.dark : 'white',
+                cursor: 'pointer',
+                transition: '0.2s'
+              }}
+            >
+              {v.name}
+            </button>
+          ))}
+        </div>
+
+        {selected.length === 7 && (
+          <button style={{ marginTop: '40px', width: '100%', padding: '20px', backgroundColor: BRAND.accent, color: BRAND.dark, fontWeight: 'bold', fontSize: '1.2rem' }}>
+            ODOSLAŤ NA POROVNANIE
+          </button>
+        )}
+      </section>
+    </div>
+  );
+}
