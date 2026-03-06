@@ -1,10 +1,14 @@
 "use client";
 import React, { useState } from 'react';
 
-// Farby z logomanuálu Forbes Growclub [cite: 65, 66]
-const BRAND = { dark: '#1e1a34', accent: '#c7a1f7', white: '#ffffff' };
+// Farby definované podľa manuálu Forbes Growclub
+const BRAND = {
+  dark: '#1e1a34',
+  accent: '#c7a1f7',
+  white: '#ffffff'
+};
 
-// Hodnoty extrahované z vášho Excelu 
+// Hodnoty extrahované z vášho Excelu
 const VALUES = [
   "PORIADOK", "HARMÓNIA", "STABILITA", "SÚDRŽNOSŤ", "MORÁLKA", "SPRAVODLIVOSŤ", 
   "DISCIPLÍNA", "ROVNOSŤ", "PRESNOSŤ", "KONSENZUS", "ŠTRUKTÚRA", "SPOLUPATRIČNOSŤ", 
@@ -25,15 +29,13 @@ export default function Assessment() {
   };
 
   return (
-    <div style={{ backgroundColor: BRAND.dark, minHeight: '100vh', color: BRAND.white, padding: '40px' }}>
-      {/* Header s rešpektovaním ochrannej zóny [cite: 31, 34] */}
+    <div style={{ backgroundColor: BRAND.dark, minHeight: '100vh', color: BRAND.white, padding: '40px', fontFamily: 'sans-serif' }}>
       <header style={{ textAlign: 'center', marginBottom: '50px', borderBottom: `2px solid ${BRAND.accent}`, paddingBottom: '20px' }}>
         <h1 style={{ fontSize: '28px', fontWeight: 'bold', textTransform: 'uppercase' }}>
           FORBES <span style={{ color: BRAND.accent }}>GROWCLUB</span>
         </h1>
         <p style={{ opacity: 0.6, fontSize: '14px' }}>
-          HODNOTOVÝ ASSESSMENT (SPIRAL DYNAMICS)
-          {/* Písmeno "w" v názve Growclub symbolizuje rast [cite: 14] */}
+          HODNOTOVÝ ASSESSMENT (Písmeno "w" symbolizuje rast)
         </p>
       </header>
 
